@@ -1,0 +1,40 @@
+.search {
+    padding-top: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search #chartName {
+    width: 30vw;
+    font-size: 4vh;
+}
+.search input {
+    height: 6vh;
+}
+.search-button {
+    padding: 0 0.5vw;
+    font-size: 3vh;
+    color: #ffffff;
+    background-color: purple;
+    width: fit-content;
+}
+input::-webkit-input-placeholder { /* WebKit, Blink, (logo颜色更多的那个)Microsoft Edge */
+    color: #aab2bd;
+    font-size: 4vh;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #aab2bd;
+    font-size: 4vh;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #aab2bd;
+    font-size: 4vh;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #aab2bd;
+    font-size: 4vh;
+}
+input::-ms-input-placeholder { /* (logo一个扁平化的e的那个)Microsoft Edge */
+    color: #aab2bd;
+    font-size: 4vh;
+}

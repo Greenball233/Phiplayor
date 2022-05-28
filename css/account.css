@@ -1,0 +1,44 @@
+.personal-info-container {
+    display: flex;
+    flex-direction: row;
+    background: rgba(0,0,0,0.286);
+    margin: 1vw;
+    width: 30vw;
+    height: 20vh;
+}
+@font-face {
+    font-family: exo;
+src: url("../font/Exo-Regular.otf")
+}
+.upload {
+    margin: 0 1vw;
+}
+.upload-button {
+    height: 5vh;
+    background: #1f1e33;
+    color: white;
+    font-size: 24px;
+    text-wrap: none;
+}
+.score-text {
+    margin: 0 1vw;
+    color: white;
+}
+.personal-info-avatar {
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    background: white;
+    height: 20vh;
+    width: 10vw;
+}
+.personal-info-avatar img {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.personal-info-avatar p {
+    font-family: exo, serif;
+    font-size: 24px;
+}

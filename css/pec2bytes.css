@@ -1,0 +1,55 @@
+input {
+    background: white;
+    color: #1f1e33;
+}
+#fileChooser {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+    width:fit-content;
+}
+.test-inner-right {
+    word-break: break-all;
+}
+#pec {
+    font-size: 4vh;
+    background: #1f1e33;
+    color: white;
+    height: 6vh;
+}
+#reset {
+    font-size: 4vh;
+    padding: 0 0.5vw;
+    height: 6vh;
+    width: fit-content;
+}
+#msg {
+    margin: 1vh 0;
+}
+.msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.msg label {
+    color: white;
+}
+.msg textarea {
+    margin-bottom: 3vh;
+}
+.msg strong {
+    color: white;
+}
+.logs strong {
+    color: white;
+}
+h2 {
+    color: white;
+    text-align: center;
+}
+h3 {
+    color: white;
+    text-align: center;
+}

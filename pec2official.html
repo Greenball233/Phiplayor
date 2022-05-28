@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>pec转官方</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pec2bytes.css">
+    <script src="js/pec2official.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/gsap.min.js"></script>
+</head>
+<body onload="onLoad()">
+<noscript>未启用javascript，网页无法使用</noscript>
+<!--<div class="menu">-->
+<!--    <div class="menu-left">-->
+<!--        <img src="image/ic_1620px.jpg" id="logo" width="128" height="128" alt="logo">-->
+<!--        <a href="index.html">Phiplayor主页</a>-->
+<!--        <a href="charts.html">谱面</a>-->
+<!--        <a href="pec2official.html">工具</a>-->
+<!--    </div>-->
+<!--    <div class="menu-right">-->
+<!--        <a href="account.html">账户</a>-->
+<!--    </div>-->
+<!--</div>-->
+<h2>pec转Official Json</h2>
+<h3>转换器核心代码作者：lchzh3473，其他部分作者：羽毛球awa</h3>
+<div id="fileChooser">
+    <input type="file" accept=".pec" id="pec" onchange="readFile()" placeholder="选择文件">
+    <input type="button" value="重置" disabled="disabled" id="reset" onclick="reset()">
+</div>
+<br>
+<div class="msg">
+    <strong id="msg" class="log">等待上传文件</strong>
+    <label>
+        输出文件名（包括后缀，不写任何东西是源文件名+.json）：
+        <input type="text" id="output" placeholder="文件名">
+    </label>
+    <input type="button" onclick="downloadJson()" disabled="disabled" value="下载文件" id="download">
+    <br>
+    <strong>转谱日志：</strong>
+    <br>
+    <textarea id="log" rows="100" cols="150" placeholder="这里输出日志" readonly="readonly"></textarea>
+</div>
+</body>
+</html>

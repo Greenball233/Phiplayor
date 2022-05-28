@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>账户</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/account.css">
+    <script src="js/upload.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body onload="onLoad()">
+<noscript>未启用javascript，网页无法使用</noscript>
+<div class="menu">
+    <div class="menu-left">
+        <img src="image/ic_1620px.jpg" id="logo" width="128" height="128" alt="logo">
+        <a href="index.html">Phiplayor主页</a>
+        <a href="charts.html">谱面</a>
+        <a href="pec2official.html">工具</a>
+    </div>
+    <div class="menu-right">
+        <a href="account.html">账户</a>
+    </div>
+</div>
+<div class="personal-info-container">
+    <div class="personal-info-avatar">
+        <img src="image/QQ图片20211003183432.jpg" alt="头像">
+        <p>Leave All Behind</p>
+    </div>
+    <p style="color: #ffffff">不知道塞什么我先留个空（</p>
+</div>
+<span class="upload">
+    <input type="file" accept="application/json" value="上传成绩" class="upload-button" onchange="uploaded(this)">
+    <span title="众所周知，phip不能联网&#10;所以成绩由phip导出再上传到服务器&#10;同时也意味着你需要自己更新你的成绩">
+        <img src="image/QQ图片20211003183432.jpg" alt="帮助" width="32px" height="32px">
+    </span>
+</span>
+<h2 class="score-text">你的分数们：</h2>
+</body>
+</html>

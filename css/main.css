@@ -1,0 +1,144 @@
+body {
+    margin: 0;
+    background: #000916;
+}
+.links {
+    width: 60vw;
+    max-width: 270px;
+    margin: auto;
+}
+.join a {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 3vh;
+    display: block;
+    width: 10vw;
+    height: 8vh;
+    margin: 15vh 5vw;
+    padding: 3vh 4vw;
+    border: 2px solid white;
+    color: white;
+    text-align: center;
+}
+.first-storey {
+    border-radius: 10px;
+    background: rgba(255,255,255,0.2);
+    margin: 2vh 20%;
+    width: 60%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.join {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+.php-girl {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50vh;
+}
+a {
+    text-decoration: none;
+}
+#logo {
+    margin: 1vh;
+}
+.links a {
+    display: block;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+.menu {
+    display: flex;
+    background-size: 100%;
+    background-color: #1f1e33;
+    width: 100%;
+    height: 10%;
+    margin: 0 auto;
+    align-items: stretch;
+    justify-content: space-between;
+}
+.menu-left {
+    display: inline-flex;
+    justify-content: flex-start;
+}
+.menu-right {
+    display: inline-flex;
+     justify-content: flex-end;
+ }
+.menu-left a {
+    font-size: 4vh;
+    padding: 2vh 0.5vw;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+}
+.menu-right a {
+    font-size: 4vh;
+    padding: 2vh 0.5vw;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+}
+.menu-left a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+.menu-left a:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+.menu-left a:visited {
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 2vh;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+}
+.menu-right a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+.menu-right a:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+.menu-right a:visited {
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 2vh;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+}
+label {
+    margin: 0 auto;
+}
+a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+a:active {
+    background-color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+}
+a:visited {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-top: 2vh;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+}
+noscript {
+    color: red;
+    text-decoration-thickness: 2px;
+}
