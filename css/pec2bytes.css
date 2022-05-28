@@ -53,3 +53,9 @@ h3 {
     color: white;
     text-align: center;
 }
+h3 a:link{
+    color: white;
+}
+h3 a:visited{
+    color: white;
+}
