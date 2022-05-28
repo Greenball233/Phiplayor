@@ -53,7 +53,7 @@ function readFile() {
         let string = Uint8ArrayToString(new Uint8Array(reader.result));
         string = string.replace(/\n/g, " ");
         string.replace(/\r/g, "");
-        json = chartify(chart123(chartp23(string, file.name)));
+        json = JSON.stringify(chartify(chart123(chartp23(string, file.name))));
         document.getElementById("download").disabled = false;
     };
 }

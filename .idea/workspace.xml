@@ -1,145 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="895fda73-012b-4730-9ff5-2963e793de4f" name="Changes" comment="Update pec2bytes.css">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/pec2bytes.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/pec2bytes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pec2official.html" beforeDir="false" afterPath="$PROJECT_DIR$/pec2official.html" afterDir="false" />
+    <list default="true" id="e5db231e-17ff-4d2e-b5db-b691a3be880f" name="变更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/pec2official.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pec2official.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="HTML File" />
-        <option value="phip扩展" />
-        <option value="CSS File" />
-        <option value="JavaScript File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="ProjectId" id="21JwKJyvbHnxvjf7i0aBjVoQ9p5" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="29msafEcEyLqdiNkLiPVvUH2Wyr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="JavaScript 调试.Index.html">
-    <configuration name="Index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" engineId="37cae5b9-e8b2-4949-9172-aafa37fbc09c" uri="http://localhost:11436/untitled/Index.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
-    <configuration name="createImageBitmap.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/js/createImageBitmap.js" working-dir="$PROJECT_DIR$/js">
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="JavaScript 调试.Index.html" />
-      <item itemvalue="Node.js.createImageBitmap.js" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JavaScript 调试.Index.html" />
-        <item itemvalue="Node.js.createImageBitmap.js" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="895fda73-012b-4730-9ff5-2963e793de4f" name="Changes" comment="" />
-      <created>1637672434299</created>
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="e5db231e-17ff-4d2e-b5db-b691a3be880f" name="变更" comment="" />
+      <created>1653729659470</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1637672434299</updated>
-      <workItem from="1637672435484" duration="225000" />
-      <workItem from="1637672670743" duration="2676000" />
-      <workItem from="1637842047886" duration="2645000" />
-      <workItem from="1637924138197" duration="7176000" />
-      <workItem from="1637971891584" duration="5221000" />
-      <workItem from="1637978905363" duration="5917000" />
-      <workItem from="1637985409213" duration="30236000" />
-      <workItem from="1638057097373" duration="7612000" />
-      <workItem from="1638068091261" duration="1649000" />
-      <workItem from="1642470796260" duration="15000" />
-      <workItem from="1642495367069" duration="615000" />
-      <workItem from="1642508726217" duration="609000" />
-      <workItem from="1653090008294" duration="544000" />
-      <workItem from="1653090582793" duration="9000" />
-      <workItem from="1653461493681" duration="226000" />
-      <workItem from="1653726615921" duration="670000" />
-      <workItem from="1653727787640" duration="731000" />
-      <workItem from="1653728720864" duration="103000" />
-      <workItem from="1653728842064" duration="24000" />
-      <workItem from="1653728869208" duration="488000" />
+      <updated>1653729659470</updated>
+      <workItem from="1653729661405" duration="5000" />
     </task>
-    <task id="LOCAL-00001" summary="Changes">
-      <created>1637985647510</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1637985647510</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Changes">
-      <created>1638059545225</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1638059545225</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Update pec2bytes.css">
-      <created>1653727984105</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1653727984105</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$/Greenball233.github.io" />
-    </ignored-roots>
-    <MESSAGE value="Changes" />
-    <MESSAGE value="Update pec2bytes.css" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update pec2bytes.css" />
   </component>
 </project>
