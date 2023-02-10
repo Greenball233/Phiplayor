@@ -31,6 +31,7 @@ const tween = [null, null,
 ];// lchzh3473 copyright部分
 let json;
 let name;
+
 function readFile() {
     clearLog();
     document.getElementById("reset").disabled = false;
@@ -46,51 +47,58 @@ function readFile() {
     }
     reader.onprogress = progress => {
         const size = file.size;
-        setLog("读取进度："+Math.floor(progress.loaded / size * 100)+"%");
+        setLog("读取进度：" + Math.floor(progress.loaded / size * 100) + "%");
     };
-    reader.onloadend= function readEnd() {
+    reader.onloadend = function readEnd() {
         setLog("读取完毕！");
         let string = Uint8ArrayToString(new Uint8Array(reader.result));
         string = string.replace(/\n/g, " ");
         string.replace(/\r/g, "");
-        json = JSON.stringify(chartify(chart123(chartp23(string, file.name))));
+        json = chart123(chartp23(string, file.name));
         document.getElementById("download").disabled = false;
     };
 }
+
 function reset() {
     window.location.reload();
 }
+
 function downloadJson() {
     let outputName = document.getElementById("output").value;
     if (outputName === "") {
-        name = file.name+".json";
+        name = file.name + ".json";
     } else {
         name = outputName;
     }
     funDownload(json, name);
 }
+
 function clearLog() {
     let output = document.getElementById("log");
     output.value = "";
 }
+
 function addLog(msg) {
     let output = document.getElementById("log");
     output.value += msg;
     output.value += "\n";
 }
+
 function setLog(msg) {
     let msgBox = document.getElementById("msg");
     msgBox.style.color = "white";
     msgBox.innerHTML = msg;
 }
+
 function setError(msg) {
     let msgBox = document.getElementById("msg");
     msgBox.style.color = "red";
     msgBox.innerHTML = msg;
 }
+
 function funDownload(content, filename) {
     var reg = new RegExp('[\\\\/:*?\"<>|]');
-    if(reg.test(name)){
+    if (reg.test(name)) {
         setError("错误：文件名不符合规则");
         return;
     }
@@ -103,13 +111,15 @@ function funDownload(content, filename) {
     eleLink.click();
     document.body.removeChild(eleLink);
 }
-function Uint8ArrayToString(fileData){
+
+function Uint8ArrayToString(fileData) {
     var dataString = "";
     for (var i = 0; i < fileData.length; i++) {
         dataString += String.fromCharCode(fileData[i]);
     }
     return dataString
 }
+
 // 以下为lchzh3473 copyright部分
 function chart123(chart) {
     const newChart = JSON.parse(JSON.stringify(chart)); //深拷贝
@@ -149,8 +159,9 @@ function chart123(chart) {
             throw `Unsupported formatVersion: ${newChart.formatVersion}`;
     }
     addLog("转换完成");
-    return newChart;
+    return JSON.stringify(newChart);
 }
+
 function chartp23(pec, filename) {
     class Chart {
         constructor() {
@@ -159,12 +170,14 @@ function chartp23(pec, filename) {
             this.numOfNotes = 0;
             this.judgeLineList = [];
         }
+
         pushLine(judgeLine) {
             this.judgeLineList.push(judgeLine);
             this.numOfNotes += judgeLine.numOfNotes;
             return judgeLine;
         }
     }
+
     class JudgeLine {
         constructor(bpm) {
             this.numOfNotes = 0;
@@ -174,7 +187,8 @@ function chartp23(pec, filename) {
             this.bpm = bpm;
             ("speedEvents,notesAbove,notesBelow,judgeLineDisappearEvents,judgeLineMoveEvents,judgeLineRotateEvents,judgeLineDisappearEventsPec,judgeLineMoveEventsPec,judgeLineRotateEventsPec").split(",").map(i => this[i] = []);
         }
-        pushNote(note, pos, isFake) {
+
+        pushNote(note, pos) {
             switch (pos) {
                 case undefined:
                 case 1:
@@ -187,11 +201,12 @@ function chartp23(pec, filename) {
                     this.notesBelow.push(note);
                     addLog("Warning: Illeagal Note Side: " + pos);
             }
-            if (!isFake) {
-                this.numOfNotes++;
-                this.numOfNotesAbove++;
-            }
+
+            this.numOfNotes++;
+            this.numOfNotesAbove++;
+
         }
+
         pushEvent(type, startTime, endTime, n1, n2, n3, n4) {
             const evt = {
                 startTime: startTime,
@@ -248,6 +263,7 @@ function chartp23(pec, filename) {
             }
         }
     }
+
     class Note {
         constructor(type, time, x, holdTime, speed) {
             this.type = type;
@@ -258,6 +274,7 @@ function chartp23(pec, filename) {
             //this.floorPosition = time % 1e9 / 104 * 1.2;
         }
     }
+
     //test start
     const rawChart = pec.match(/[^\n\r ]+/g).map(i => isNaN(i) ? String(i) : Number(i));
     const qwqChart = new Chart();
@@ -307,6 +324,7 @@ function chartp23(pec, filename) {
         rawarr.length = 0;
         rawstr = next;
     }
+
     //将pec时间转换为pgr时间
     function calcTime(timePec) {
         let timePhi = 0;
@@ -317,35 +335,52 @@ function chartp23(pec, filename) {
         }
         return timePhi;
     }
+
     //处理note和判定线事件
     let linesPec = [];
     for (const i of raw.n1) {
+        if (i[4]) {
+            addLog(`检测到FakeNote(将不会被添加进json)\n位于:"n1 ${i.slice(0, 5).join(" ")}"\n`);
+            continue;
+        }
         if (!linesPec[i[0]]) linesPec[i[0]] = new JudgeLine(baseBpm);
-        linesPec[i[0]].pushNote(new Note(1, calcTime(i[1]) + (i[4] ? 1e9 : 0), i[2] / 115.2, 0, i[5]), i[3], i[4]);
-        if (i[3] != 1 && i[3] != 2) message.sendWarning(`检测到非法方向:${i[3]}(将被视为2)\n位于:"n1 ${i.slice(0, 5).join(" ")}"\n来自${filename}`);
-        if (i[4]) message.sendWarning(`检测到FakeNote(可能无法正常显示)\n位于:"n1 ${i.slice(0, 5).join(" ")}"\n来自${filename}`);
-        if (i[6] != 1) message.sendWarning(`检测到异常Note(可能无法正常显示)\n位于:"n1 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n来自${filename}`);
+        linesPec[i[0]].pushNote(new Note(1, calcTime(i[1]), i[2] / 115.2, 0, i[5]), i[3]);
+        if (i[3] != 1 && i[3] != 2) addLog(`检测到非法方向:${i[3]}(将被视为2)\n位于:"n1 ${i.slice(0, 5).join(" ")}"\n`);
+        //if (i[4]) addLog(`检测到FakeNote(可能无法正常显示)\n位于:"n1 ${i.slice(0, 5).join(" ")}"\n`);
+        if (i[6] != 1) addLog(`检测到异常Note(可能无法正常显示)\n位于:"n1 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n`);
     } //102.4
     for (const i of raw.n2) {
+        if (i[5]) {
+            addLog(`检测到FakeNote(将不会被添加进json)\n位于:"n2 ${i.slice(0, 6).join(" ")}"\n`);
+            continue;
+        }
         if (!linesPec[i[0]]) linesPec[i[0]] = new JudgeLine(baseBpm);
-        linesPec[i[0]].pushNote(new Note(3, calcTime(i[1]) + (i[5] ? 1e9 : 0), i[3] / 115.2, calcTime(i[2]) - calcTime(i[1]), i[6]), i[4], i[5]);
-        if (i[4] != 1 && i[4] != 2) message.sendWarning(`检测到非法方向:${i[4]}(将被视为2)\n位于:"n2 ${i.slice(0, 5).join(" ")} # ${i[6]} & ${i[7]}"\n来自${filename}`);
-        if (i[5]) message.sendWarning(`检测到FakeNote(可能无法正常显示)\n位于:"n2 ${i.slice(0, 6).join(" ")}"\n来自${filename}`);
-        if (i[7] != 1) message.sendWarning(`检测到异常Note(可能无法正常显示)\n位于:"n2 ${i.slice(0, 5).join(" ")} # ${i[6]} & ${i[7]}"\n来自${filename}`);
+        linesPec[i[0]].pushNote(new Note(3, calcTime(i[1]), i[3] / 115.2, calcTime(i[2]) - calcTime(i[1]), i[6]), i[4]);
+        if (i[4] != 1 && i[4] != 2) addLog(`检测到非法方向:${i[4]}(将被视为2)\n位于:"n2 ${i.slice(0, 5).join(" ")} # ${i[6]} & ${i[7]}"\n`);
+        //if (i[5]) addLog(`检测到FakeNote(可能无法正常显示)\n位于:"n2 ${i.slice(0, 6).join(" ")}"\n`);
+        if (i[7] != 1) addLog(`检测到异常Note(可能无法正常显示)\n位于:"n2 ${i.slice(0, 5).join(" ")} # ${i[6]} & ${i[7]}"\n`);
     }
     for (const i of raw.n3) {
+        if (i[4]) {
+            addLog(`检测到FakeNote(将不会被添加进json)\n位于:"n3 ${i.slice(0, 5).join(" ")}"\n`);
+            continue;
+        }
         if (!linesPec[i[0]]) linesPec[i[0]] = new JudgeLine(baseBpm);
-        linesPec[i[0]].pushNote(new Note(4, calcTime(i[1]) + (i[4] ? 1e9 : 0), i[2] / 115.2, 0, i[5]), i[3], i[4]);
-        if (i[3] != 1 && i[3] != 2) message.sendWarning(`检测到非法方向:${i[3]}(将被视为2)\n位于:"n3 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n来自${filename}`);
-        if (i[4]) message.sendWarning(`检测到FakeNote(可能无法正常显示)\n位于:"n3 ${i.slice(0, 5).join(" ")}"\n来自${filename}`);
-        if (i[6] != 1) message.sendWarning(`检测到异常Note(可能无法正常显示)\n位于:"n3 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n来自${filename}`);
+        linesPec[i[0]].pushNote(new Note(4, calcTime(i[1]), i[2] / 115.2, 0, i[5]), i[3]);
+        if (i[3] != 1 && i[3] != 2) addLog(`检测到非法方向:${i[3]}(将被视为2)\n位于:"n3 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n`);
+        //if (i[4]) addLog(`检测到FakeNote(可能无法正常显示)\n位于:"n3 ${i.slice(0, 5).join(" ")}"\n`);
+        if (i[6] != 1) addLog(`检测到异常Note(可能无法正常显示)\n位于:"n3 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n`);
     }
     for (const i of raw.n4) {
+        if (i[4]) {
+            addLog(`检测到FakeNote(将不会被添加进json)\n位于:"n4 ${i.slice(0, 5).join(" ")}"\n`);
+            continue;
+        }
         if (!linesPec[i[0]]) linesPec[i[0]] = new JudgeLine(baseBpm);
-        linesPec[i[0]].pushNote(new Note(2, calcTime(i[1]) + (i[4] ? 1e9 : 0), i[2] / 115.2, 0, i[5]), i[3], i[4]);
-        if (i[3] != 1 && i[3] != 2) message.sendWarning(`检测到非法方向:${i[3]}(将被视为2)\n位于:"n4 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n来自${filename}`);
-        if (i[4]) message.sendWarning(`检测到FakeNote(可能无法正常显示)\n位于:"n4 ${i.slice(0, 5).join(" ")}"\n来自${filename}`);
-        if (i[6] != 1) message.sendWarning(`检测到异常Note(可能无法正常显示)\n位于:"n4 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n来自${filename}`);
+        linesPec[i[0]].pushNote(new Note(2, calcTime(i[1]), i[2] / 115.2, 0, i[5]), i[3]);
+        if (i[3] != 1 && i[3] != 2) addLog(`检测到非法方向:${i[3]}(将被视为2)\n位于:"n4 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n`);
+        //if (i[4]) addLog(`检测到FakeNote(可能无法正常显示)\n位于:"n4 ${i.slice(0, 5).join(" ")}"\n`);
+        if (i[6] != 1) addLog(`检测到异常Note(可能无法正常显示)\n位于:"n4 ${i.slice(0, 5).join(" ")} # ${i[5]} & ${i[6]}"\n`);
     }
     //变速
     for (const i of raw.cv) {
@@ -356,16 +391,16 @@ function chartp23(pec, filename) {
     for (const i of raw.ca) {
         if (!linesPec[i[0]]) linesPec[i[0]] = new JudgeLine(baseBpm);
         linesPec[i[0]].pushEvent(-1, calcTime(i[1]), calcTime(i[1]), i[2] > 0 ? i[2] / 255 : 0); //暂不支持alpha值扩展
-        if (i[2] < 0) message.sendWarning(`检测到负数Alpha:${i[2]}(将被视为0)\n位于:"ca ${i.join(" ")}"\n来自${filename}`);
+        if (i[2] < 0) addLog(`检测到负数Alpha:${i[2]}(将被视为0)\n位于:"ca ${i.join(" ")}"\n`);
     }
     for (const i of raw.cf) {
         if (!linesPec[i[0]]) linesPec[i[0]] = new JudgeLine(baseBpm);
         if (i[1] > i[2]) {
-            message.sendWarning(`检测到开始时间大于结束时间(将禁用此事件)\n位于:"cf ${i.join(" ")}"\n来自${filename}`);
+            addLog(`检测到开始时间大于结束时间(将禁用此事件)\n位于:"cf ${i.join(" ")}"\n`);
             continue;
         }
         linesPec[i[0]].pushEvent(-1, calcTime(i[1]), calcTime(i[2]), i[3] > 0 ? i[3] / 255 : 0);
-        if (i[3] < 0) message.sendWarning(`检测到负数Alpha:${i[3]}(将被视为0)\n位于:"cf ${i.join(" ")}"\n来自${filename}`);
+        if (i[3] < 0) addLog(`检测到负数Alpha:${i[3]}(将被视为0)\n位于:"cf ${i.join(" ")}"\n`);
     }
     //移动
     for (const i of raw.cp) {
@@ -375,11 +410,11 @@ function chartp23(pec, filename) {
     for (const i of raw.cm) {
         if (!linesPec[i[0]]) linesPec[i[0]] = new JudgeLine(baseBpm);
         if (i[1] > i[2]) {
-            message.sendWarning(`检测到开始时间大于结束时间(将禁用此事件)\n位于:"cm ${i.join(" ")}"\n来自${filename}`);
+            addLog(`检测到开始时间大于结束时间(将禁用此事件)\n位于:"cm ${i.join(" ")}"\n`);
             continue;
         }
         linesPec[i[0]].pushEvent(-2, calcTime(i[1]), calcTime(i[2]), i[3] / 2048, i[4] / 1400, i[5]);
-        if (i[5] && !tween[i[5]] && i[5] != 1) message.sendWarning(`未知的缓动类型:${i[5]}(将被视为1)\n位于:"cm ${i.join(" ")}"\n来自${filename}`);
+        if (i[5] && !tween[i[5]] && i[5] != 1) addLog(`未知的缓动类型:${i[5]}(将被视为1)\n位于:"cm ${i.join(" ")}"\n`);
     }
     //旋转
     for (const i of raw.cd) {
@@ -389,11 +424,11 @@ function chartp23(pec, filename) {
     for (const i of raw.cr) {
         if (!linesPec[i[0]]) linesPec[i[0]] = new JudgeLine(baseBpm);
         if (i[1] > i[2]) {
-            message.sendWarning(`检测到开始时间大于结束时间(将禁用此事件)\n位于:"cr ${i.join(" ")}"\n来自${filename}`);
+            addLog(`检测到开始时间大于结束时间(将禁用此事件)\n位于:"cr ${i.join(" ")}"\n`);
             continue;
         }
         linesPec[i[0]].pushEvent(-3, calcTime(i[1]), calcTime(i[2]), -i[3], i[4]);
-        if (i[4] && !tween[i[4]] && i[4] != 1) message.sendWarning(`未知的缓动类型:${i[4]}(将被视为1)\n位于:"cr ${i.join(" ")}"\n来自${filename}`);
+        if (i[4] && !tween[i[4]] && i[4] != 1) addLog(`未知的缓动类型:${i[4]}(将被视为1)\n位于:"cr ${i.join(" ")}"\n`);
     }
     for (const i of linesPec) {
         if (i) {
@@ -501,84 +536,6 @@ function chartp23(pec, filename) {
             qwqChart.pushLine(i);
         }
     }
+    console.log(JSON.stringify(qwqChart));
     return JSON.parse(JSON.stringify(qwqChart));
-}
-function chartify(json) {
-    let newChart = {};
-    newChart.formatVersion = 3;
-    newChart.offset = json.offset;
-    newChart.numOfNotes = json.numOfNotes;
-    newChart.judgeLineList = [];
-    for (const i of json.judgeLineList) {
-        let newLine = {};
-        newLine.numOfNotes = i.numOfNotes;
-        newLine.numOfNotesAbove = i.numOfNotesAbove;
-        newLine.numOfNotesBelow = i.numOfNotesBelow;
-        newLine.bpm = i.bpm;
-        ("speedEvents,notesAbove,notesBelow,judgeLineDisappearEvents,judgeLineMoveEvents,judgeLineRotateEvents").split(",").map(i => newLine[i] = []);
-        for (const j of i.speedEvents) {
-            if (j.startTime == j.endTime) continue;
-            let newEvent = {};
-            newEvent.startTime = j.startTime;
-            newEvent.endTime = j.endTime;
-            newEvent.value = Number(j.value.toFixed(6));
-            newEvent.floorPosition = Number(j.floorPosition.toFixed(6));
-            newLine.speedEvents.push(newEvent);
-        }
-        for (const j of i.notesAbove) {
-            let newNote = {};
-            newNote.type = j.type;
-            newNote.time = j.time;
-            newNote.positionX = Number(j.positionX.toFixed(6));
-            newNote.holdTime = j.holdTime;
-            newNote.speed = Number(j.speed.toFixed(6));
-            newNote.floorPosition = Number(j.floorPosition.toFixed(6));
-            newLine.notesAbove.push(newNote);
-        }
-        for (const j of i.notesBelow) {
-            let newNote = {};
-            newNote.type = j.type;
-            newNote.time = j.time;
-            newNote.positionX = Number(j.positionX.toFixed(6));
-            newNote.holdTime = j.holdTime;
-            newNote.speed = Number(j.speed.toFixed(6));
-            newNote.floorPosition = Number(j.floorPosition.toFixed(6));
-            newLine.notesBelow.push(newNote);
-        }
-        for (const j of i.judgeLineDisappearEvents) {
-            if (j.startTime == j.endTime) continue;
-            let newEvent = {};
-            newEvent.startTime = j.startTime;
-            newEvent.endTime = j.endTime;
-            newEvent.start = Number(j.start.toFixed(6));
-            newEvent.end = Number(j.end.toFixed(6));
-            newEvent.start2 = Number(j.start2.toFixed(6));
-            newEvent.end2 = Number(j.end2.toFixed(6));
-            newLine.judgeLineDisappearEvents.push(newEvent);
-        }
-        for (const j of i.judgeLineMoveEvents) {
-            if (j.startTime == j.endTime) continue;
-            let newEvent = {};
-            newEvent.startTime = j.startTime;
-            newEvent.endTime = j.endTime;
-            newEvent.start = Number(j.start.toFixed(6));
-            newEvent.end = Number(j.end.toFixed(6));
-            newEvent.start2 = Number(j.start2.toFixed(6));
-            newEvent.end2 = Number(j.end2.toFixed(6));
-            newLine.judgeLineMoveEvents.push(newEvent);
-        }
-        for (const j of i.judgeLineRotateEvents) {
-            if (j.startTime == j.endTime) continue;
-            let newEvent = {};
-            newEvent.startTime = j.startTime;
-            newEvent.endTime = j.endTime;
-            newEvent.start = Number(j.start.toFixed(6));
-            newEvent.end = Number(j.end.toFixed(6));
-            newEvent.start2 = Number(j.start2.toFixed(6));
-            newEvent.end2 = Number(j.end2.toFixed(6));
-            newLine.judgeLineRotateEvents.push(newEvent);
-        }
-        newChart.judgeLineList.push(newLine);
-    }
-    return newChart;
 }

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5db231e-17ff-4d2e-b5db-b691a3be880f" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/pec2official.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pec2official.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pec2official.html" beforeDir="false" afterPath="$PROJECT_DIR$/pec2official.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +23,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../1212line" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -33,7 +34,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1653729659470</updated>
-      <workItem from="1653729661405" duration="5000" />
+      <workItem from="1653729661405" duration="3434000" />
+      <workItem from="1653741087310" duration="1247000" />
+      <workItem from="1653789871672" duration="28000" />
     </task>
     <servers />
   </component>
